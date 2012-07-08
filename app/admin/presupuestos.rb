@@ -92,8 +92,7 @@ ActiveAdmin.register Presupuesto do
   end
 
   # SIDEBARS
-  sidebar :help, :only => :index do
-    "Need help? Email us at help@example.com"
-  end
+  # sidebar "", :only => :index do
+  # end
 
 end

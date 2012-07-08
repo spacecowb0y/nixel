@@ -40,7 +40,17 @@ h1, h2, h3, h4, h5, h6 {
 
 #header ul#tabs > li a { border-radius:5px; }
 #header ul#tabs > li.current > a { background:#4c4c4c; }
-#header ul#tabs > li > a:hover { background:#626262; }
+#header ul#tabs > li > a:hover,
+#header ul#tabs > li ul,
+#header ul#tabs > li.has_nested:hover > a,
+#header ul#tabs > li.has_nested.current > a { background-color:#626262; }
+
+#header ul#tabs > li ul,
+#header ul#tabs > li.has_nested:hover > a { border-radius:4px; }
+
+#header ul#tabs > li.has_nested:hover > a { border-bottom-color:#626262; }
+
+#header ul#tabs > li ul { margin-top:3px; }
 
 #title_bar h2 { font-size:2.2em; }
 

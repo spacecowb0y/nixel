@@ -4,7 +4,7 @@ ActiveAdmin.register AdminUser do
   menu :label => "Administradores", :parent => "Usuarios"
 
   # FILTERS
-  filter :email, :as => :select, :collection => AdminUser.all.collect{|cliente| [cliente.email, cliente.id] }
+  filter :email, :as => :select, :collection => AdminUser.all.collect{|cliente| [cliente.email, cliente.email] }
 
   # INDEX
   index do
