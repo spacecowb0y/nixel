@@ -98,4 +98,10 @@ ActiveAdmin.register Presupuesto do
   # sidebar "", :only => :index do
   # end
 
+  # BUTTONS
+  action_item :only => :index do
+    link_to "Nuevo Cliente", new_admin_cliente_path        
+  end
+
+
 end
