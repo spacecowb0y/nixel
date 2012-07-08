@@ -62,9 +62,12 @@ ActiveAdmin.register Presupuesto do
 
   # INDEX
   index do
-  	column "ID", :sortable =>:id do |presupuesto|
+  	column "ID", :sortable => :id do |presupuesto|
   		link_to presupuesto.id, admin_presupuesto_path(presupuesto)
   	end
+    column "Cliente", :cliente do |presupuesto|
+      presupuesto.cliente.nil? ? "N/A" : link_to(presupuesto.cliente.nombre, admin_cliente_path(presupuesto.cliente))
+    end
   	column "Estado", :sortable => :estado_reparacion do |presupuesto|
       status_tag presupuesto.estado_reparacion, :error   if  %w(Ingresado).include? presupuesto.estado_reparacion
       status_tag presupuesto.estado_reparacion, :ok      if  %w(Entregado).include? presupuesto.estado_reparacion
@@ -73,13 +76,13 @@ ActiveAdmin.register Presupuesto do
     end
   	column "Tipo de Equipo", :tipo_reparacion
   	column "Marca", :marca_equipo do |presupuesto|
-      presupuesto.marca_equipo.nil? ? presupuesto.marca_equipo : "N/A"
+      presupuesto.marca_equipo.blank? ? "N/A" : presupuesto.marca_equipo
     end
   	column "Modelo", :modelo_equipo do |presupuesto|
-      presupuesto.modelo_equipo.nil? ? presupuesto.modelo_equipo : "N/A"
+      presupuesto.modelo_equipo.blank? ? "N/A" : presupuesto.modelo_equipo
     end
   	column "Falla", :falla_equipo do |presupuesto|
-      presupuesto.falla_equipo.nil? ? presupuesto.falla_equipo : "N/A"
+      presupuesto.falla_equipo.blank? ? "N/A" : truncate(presupuesto.falla_equipo, :length => 80)
     end
   	column "Total", :valor_reparacion do |presupuesto|
       "$#{presupuesto.valor_reparacion}"
