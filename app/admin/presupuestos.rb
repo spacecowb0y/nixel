@@ -11,7 +11,7 @@ ActiveAdmin.register Presupuesto do
   scope :ingresados do |presupuestos|
     presupuestos.where('estado_reparacion = ?', 'Ingresado')
   end
-  scope :presupuestos do |presupuestos|
+  scope :presupuestados do |presupuestos|
     presupuestos.where('estado_reparacion = ?', 'Presupuestado')
   end
   scope :en_progreso do |presupuestos|
