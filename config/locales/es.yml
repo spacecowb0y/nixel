@@ -15,7 +15,7 @@ es:
     delete_model: "Eliminar %{model}"
     details: "Detalles de %{model}"
     cancel: "Cancelar"
-    empty: "Vacío"
+    empty: "Informacion no especificada"
     previous: "Anterior"
     next: "Siguiente"
     download: "Descargar:"
