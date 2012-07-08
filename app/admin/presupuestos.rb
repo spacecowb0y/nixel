@@ -4,7 +4,7 @@ ActiveAdmin.register Presupuesto do
   ALL_TYPES   	 = %w(Computadora_de_escritorio Notebook Netbook Cargador Monitor Impresora Telefono Tablet Otro)
   ALL_ESTADOS 	 = %w(Bueno Regular Malo)
   ALL_ACCESORIOS = %w(Cargador Cable_de_poder Bateria Bolso Funda)
-  ALL_STATUS		 = %w(Ingresado Presupuestado En_Progreso Pausado Finalizado Entregado)
+  ALL_STATUS		 = %w(Ingresado Presupuestado En_Progreso Pausado Terminado Entregado)
 
   # SCOPES 
   scope :all, :default => true
@@ -69,10 +69,10 @@ ActiveAdmin.register Presupuesto do
       presupuesto.cliente.nil? ? "N/A" : link_to(presupuesto.cliente.nombre, admin_cliente_path(presupuesto.cliente))
     end
   	column "Estado", :sortable => :estado_reparacion do |presupuesto|
-      status_tag presupuesto.estado_reparacion, :error   if  %w(Ingresado Finalizado).include? presupuesto.estado_reparacion
+      status_tag presupuesto.estado_reparacion, :error   if  %w(Ingresado).include? presupuesto.estado_reparacion
       status_tag presupuesto.estado_reparacion, :ok      if  %w(Entregado).include? presupuesto.estado_reparacion
       status_tag presupuesto.estado_reparacion, :warning if  %w(Presupuestado En_Progreso).include? presupuesto.estado_reparacion
-      status_tag presupuesto.estado_reparacion           if  %w(Pausado).include? presupuesto.estado_reparacion
+      status_tag presupuesto.estado_reparacion           if  %w(Pausado Terminado).include? presupuesto.estado_reparacion
     end
   	column "Tipo de Equipo", :tipo_reparacion
   	column "Marca", :marca_equipo do |presupuesto|
