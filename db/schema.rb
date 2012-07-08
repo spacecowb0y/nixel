@@ -58,19 +58,19 @@ ActiveRecord::Schema.define(:version => 20120707224942) do
 
   create_table "presupuestos", :force => true do |t|
     t.integer  "cliente_id"
-    t.string   "estado_reparacion", :default => "Ingresado"
-    t.string   "tipo"
-    t.string   "marca"
-    t.string   "modelo"
+    t.string   "estado_reparacion",   :default => "Ingresado"
+    t.string   "tipo_reparacion"
+    t.string   "marca_equipo"
+    t.string   "modelo_equipo"
     t.string   "estado_equipo"
-    t.string   "accesorios"
-    t.text     "falla"
-    t.text     "backup"
-    t.float    "adelanto",          :default => 0.0
-    t.float    "valor",             :default => 0.0
-    t.boolean  "cobrado",           :default => false
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.string   "accesorios_equipo"
+    t.text     "falla_equipo"
+    t.text     "backup_equipo"
+    t.float    "adelanto_reparacion", :default => 0.0
+    t.float    "valor_reparacion",    :default => 0.0
+    t.boolean  "cobrado",             :default => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
 end

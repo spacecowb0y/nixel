@@ -8,31 +8,34 @@ ActiveAdmin.register Presupuesto do
 
   # FORM
   form do |f|
-    f.inputs "Datos del Cliente" do
+    f.inputs "Datos Basicos" do
       f.input :cliente, :as => :select, :collection => Cliente.all.collect{|cliente| [cliente.nombre, cliente.id] }
+      f.input :estado_reparacion, :include_blank => false, :as => :select, :collection => ALL_STATUS.collect{|estado_reparacion| estado_reparacion.humanize }, :label => "Estado del presupuesto"
+      f.input :tipo_reparacion, :include_blank => false, :as => :select, :collection => ALL_TYPES.collect{|tipo| tipo.humanize }, :label => "Tipo de reparacion"
     end
-  	f.inputs "Detalles del Presupuesto" do
-  		f.input :estado_reparacion, :include_blank => false, :as => :select, :collection => ALL_STATUS.collect{|estado_reparacion| estado_reparacion.humanize }, :label => "Estado de la reparacion"
-  		f.input :tipo, :include_blank => false, :as => :select, :collection => ALL_TYPES.collect{|tipo| tipo.humanize }, :label => "Tipo de equipo"
-  		f.input :marca
-  		f.input :modelo
-  		f.input :estado_equipo, :include_blank => false, :as => :select, :collection => ALL_ESTADOS.collect{|estado_equipo| estado_equipo.humanize }, :label => "Estado del equipo"
-  		f.input :accesorios
-  		f.input :falla, :input_html => { :rows => 8 }
-  		f.input :backup, :input_html => { :rows => 8 }
+  	f.inputs "Datos del Equipo" do
+  		f.input :marca_equipo, :label => "Marca"
+  		f.input :modelo_equipo, :label => "Modelo"
+  		f.input :estado_equipo, :include_blank => false, :as => :select, :collection => ALL_ESTADOS.collect{|estado_equipo| estado_equipo.humanize }, :label => "Estado"
+  		f.input :falla_equipo, :input_html => { :rows => 8 }, :label => "Falla"
    	end
-    f.inputs "Detalles del Pago" do
-      f.input :adelanto
-      f.input :valor
+
+    f.inputs "Datos Opcionales" do
+      f.input :accesorios_equipo, :label => "Accesorios del equipo"
+      f.input :backup_equipo, :input_html => { :rows => 8 }, :label => "Backup", :hint => "En caso de requerir backup, completar con la informacion necesaria."
+    end
+
+    f.inputs "Datos del Pago" do
+      f.input :adelanto_reparacion, :label => "Adelanto $"
+      f.input :valor_reparacion, :label => "Valor final de la reparacion $"
       f.input :cobrado
     end
    	f.buttons
   end
 
   # FILTERS
-
-  filter :estado_reparacion, :as => :select, :collection => ALL_STATUS, :label => "Estado de la reparacion"
-  filter :tipo, :as => :select, :collection => ALL_TYPES, :label => "Tipo de Equipo"
+  filter :estado_reparacion, :as => :select, :collection => ALL_STATUS.collect{|estado_reparacion| estado_reparacion.humanize }, :label => "Estado de la reparacion"
+  filter :tipo_reparacion, :as => :select, :collection => ALL_TYPES.collect{|tipo| tipo.humanize }, :label => "Tipo de reparacion", :label => "Tipo de reparacion"
   filter :cobrado, :as => :select
 
   # INDEX
@@ -41,11 +44,11 @@ ActiveAdmin.register Presupuesto do
   		link_to presupuesto.id, admin_presupuesto_path(presupuesto)
   	end
   	column "Estado", :estado_reparacion
-  	column "Tipo de Equipo", :tipo
-  	column :marca
-  	column :modelo
-  	column :falla
-  	column :valor
+  	column "Tipo de Equipo", :tipo_reparacion
+  	column :marca_equipo
+  	column :modelo_equipo
+  	column :falla_equipo
+  	column :valor_reparacion
   	column :cobrado do |presupuesto|
   		presupuesto.cobrado ? "Si" : "No"
   	end
