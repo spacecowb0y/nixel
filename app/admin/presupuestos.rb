@@ -7,6 +7,7 @@ ActiveAdmin.register Presupuesto do
   ALL_STATUS		 = %w(Ingresado Presupuestado En_Progreso Pausado Finalizado Entregado)
 
   # FILTERS
+  filter :cliente, :as => :select, :collection => Cliente.all.collect{|cliente| [cliente.nombre, cliente.id] }
   filter :estado_reparacion, :as => :select, :collection => ALL_STATUS.collect{|estado_reparacion| estado_reparacion.humanize }, :label => "Estado de la reparacion"
   filter :tipo_reparacion, :as => :select, :collection => ALL_TYPES.collect{|tipo| tipo.humanize }, :label => "Tipo de reparacion", :label => "Tipo de reparacion"
   filter :cobrado, :as => :select
