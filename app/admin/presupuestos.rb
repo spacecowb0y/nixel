@@ -6,6 +6,11 @@ ActiveAdmin.register Presupuesto do
   ALL_ACCESORIOS = %w(Cargador Cable_de_poder Bateria Bolso Funda)
   ALL_STATUS		 = %w(Ingresado Presupuestado En_Progreso Pausado Finalizado Entregado)
 
+  # FILTERS
+  filter :estado_reparacion, :as => :select, :collection => ALL_STATUS.collect{|estado_reparacion| estado_reparacion.humanize }, :label => "Estado de la reparacion"
+  filter :tipo_reparacion, :as => :select, :collection => ALL_TYPES.collect{|tipo| tipo.humanize }, :label => "Tipo de reparacion", :label => "Tipo de reparacion"
+  filter :cobrado, :as => :select
+
   # FORM
   form do |f|
     f.inputs "Datos Basicos" do
@@ -22,7 +27,7 @@ ActiveAdmin.register Presupuesto do
 
     f.inputs "Datos Opcionales" do
       f.input :accesorios_equipo, :label => "Accesorios del equipo"
-      f.input :backup_equipo, :input_html => { :rows => 8 }, :label => "Backup", :hint => "En caso de requerir backup, completar con la informacion necesaria."
+      f.input :backup_equipo, :input_html => { :rows => 8 }, :label => "Backup", :hint => "En caso de requerir backup, especificar los directorios que deben ser resguardos."
     end
 
     f.inputs "Datos del Pago" do
@@ -32,11 +37,6 @@ ActiveAdmin.register Presupuesto do
     end
    	f.buttons
   end
-
-  # FILTERS
-  filter :estado_reparacion, :as => :select, :collection => ALL_STATUS.collect{|estado_reparacion| estado_reparacion.humanize }, :label => "Estado de la reparacion"
-  filter :tipo_reparacion, :as => :select, :collection => ALL_TYPES.collect{|tipo| tipo.humanize }, :label => "Tipo de reparacion", :label => "Tipo de reparacion"
-  filter :cobrado, :as => :select
 
   # INDEX
   index do
