@@ -15,6 +15,7 @@ ActiveAdmin.register Cliente do
     column :telefono_movil
     column :direccion
     column "Creado en", :created_at
+    default_actions
   end
 
   # SHOW
