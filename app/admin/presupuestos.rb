@@ -45,10 +45,10 @@ ActiveAdmin.register Presupuesto do
   	end
   	column "Estado", :estado_reparacion
   	column "Tipo de Equipo", :tipo_reparacion
-  	column :marca_equipo
-  	column :modelo_equipo
-  	column :falla_equipo
-  	column :valor_reparacion
+  	column "Marca", :marca_equipo
+  	column "Modelo", :modelo_equipo
+  	column "Falla", :falla_equipo
+  	column "Total", :valor_reparacion
   	column :cobrado do |presupuesto|
   		presupuesto.cobrado ? "Si" : "No"
   	end
