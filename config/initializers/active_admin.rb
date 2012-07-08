@@ -128,6 +128,8 @@ ActiveAdmin.setup do |config|
   #   config.register_javascript 'my_javascript.js'
 end
 
+# Hack to overwrite the default footer paragraph 
+# and make it custom
 ActiveAdmin::Views::Pages::Base.class_eval do
   private
   def build_footer
@@ -135,4 +137,13 @@ ActiveAdmin::Views::Pages::Base.class_eval do
       para "Desarrollado por #{link_to("Diego A. Peralta", "http://twitter.com/diego_ar")} <br/> Potenciado con #{link_to("Active Admin", "http://www.activeadmin.info")} #{ActiveAdmin::VERSION}".html_safe
     end
   end
+end
+
+# Hack to remove the dashboard link
+# from the dashboard menu
+module ActiveAdmin 
+  class Namespace 
+    def register_dashboard 
+    end 
+  end 
 end
