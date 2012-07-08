@@ -7,6 +7,11 @@ ActiveAdmin.register Cliente do
   filter :nombre, :as => :select, :collection => Cliente.all.collect{|cliente| [cliente.nombre, cliente.id] }
   filter :email, :as => :select, :collection => Cliente.all.collect{|cliente| [cliente.email, cliente.id] }
 
+  # BUTTONS
+  action_item :only => [:index, :new] do
+    link_to "Nuevo Presupuesto", new_admin_presupuesto_path        
+  end
+
   # INDEX
   index do
     column :nombre

@@ -99,7 +99,7 @@ ActiveAdmin.register Presupuesto do
   # end
 
   # BUTTONS
-  action_item :only => :index do
+  action_item :only => [:index, :new] do
     link_to "Nuevo Cliente", new_admin_cliente_path        
   end
 
