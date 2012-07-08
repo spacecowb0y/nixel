@@ -14,4 +14,5 @@ $(function(){
   $("#q_tipo_reparacion").chosen();
   $("#q_nombre").chosen();
   $("#q_email").chosen();
+  $("#presupuesto_cliente_id").chosen();
 });
