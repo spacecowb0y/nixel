@@ -4,8 +4,8 @@ ActiveAdmin.register Cliente do
   menu :parent => "Usuarios"
 
   # FILTERS
-  filter :nombre
-  filter :email
+  filter :nombre, :as => :select, :collection => Cliente.all.collect{|cliente| [cliente.nombre, cliente.id] }
+  filter :email, :as => :select, :collection => Cliente.all.collect{|cliente| [cliente.email, cliente.id] }
 
   # INDEX
   index do

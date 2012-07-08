@@ -134,7 +134,7 @@ ActiveAdmin::Views::Pages::Base.class_eval do
   private
   def build_footer
     div :id => "footer" do
-      para "Desarrollado por #{link_to("Diego A. Peralta", "http://twitter.com/diego_ar")} <br/> Potenciado con #{link_to("Active Admin", "http://www.activeadmin.info")} #{ActiveAdmin::VERSION}".html_safe
+      para "Desarrollado por #{link_to("Diego A. Peralta", "http://twitter.com/diego_ar")} una fria tarde de invierno en Bahia Blanca. <br/> Potenciado con #{link_to("Active Admin", "http://www.activeadmin.info")} #{ActiveAdmin::VERSION}".html_safe
     end
   end
 end
