@@ -6,7 +6,7 @@
 // styles here:
 
 a, a:link, a:visited { color:#BD1B1C; }
-form fieldset ol > li label {}
+form fieldset ol > li label { font-weight:normal; }
 form fieldset > ol > li.boolean label { width:80% !important; }
 
 form fieldset legend span {
@@ -19,7 +19,6 @@ form fieldset legend span {
 h1, h2, h3, h4, h5, h6 {
   font-weight:100 !important;
   color:#606060; 
-  text-transform:uppercase;
 }
 
 #header {
@@ -44,4 +43,6 @@ h1, h2, h3, h4, h5, h6 {
 #title_bar h2 { font-size:2.2em; }
 
 .breadcrumb a, .breadcrumb a:link, .breadcrumb a:visited, .breadcrumb a:active { color:#666; }
+
+.attributes_table table th { color:#111; }
 
