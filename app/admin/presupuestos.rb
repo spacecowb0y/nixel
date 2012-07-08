@@ -69,7 +69,7 @@ ActiveAdmin.register Presupuesto do
       presupuesto.cliente.nil? ? "N/A" : link_to(presupuesto.cliente.nombre, admin_cliente_path(presupuesto.cliente))
     end
   	column "Estado", :sortable => :estado_reparacion do |presupuesto|
-      status_tag presupuesto.estado_reparacion, :error   if  %w(Ingresado).include? presupuesto.estado_reparacion
+      status_tag presupuesto.estado_reparacion, :error   if  %w(Ingresado Finalizado).include? presupuesto.estado_reparacion
       status_tag presupuesto.estado_reparacion, :ok      if  %w(Entregado).include? presupuesto.estado_reparacion
       status_tag presupuesto.estado_reparacion, :warning if  %w(Presupuestado En_Progreso).include? presupuesto.estado_reparacion
       status_tag presupuesto.estado_reparacion           if  %w(Pausado).include? presupuesto.estado_reparacion
