@@ -33,8 +33,17 @@ ActiveAdmin.register Presupuesto do
   filter :created_at,       :label => "Ingresado en"
 
   # SIDEBARS
-  # sidebar "", :only => :index do
-  # end
+  sidebar "Detalles del Presupuesto", :only => :show do
+    attributes_table_for presupuesto do
+      row :cliente do
+        presupuesto.cliente.nombre
+      end
+      row :adelanto_reparacion
+      row :valor_reparacion
+      row :cobrado
+    end
+    
+  end
 
   # BUTTONS
   action_item :only => [:index, :new] do
@@ -94,24 +103,24 @@ ActiveAdmin.register Presupuesto do
       "$#{presupuesto.valor_reparacion}"
     end
   	column "Cobrado", :sortable => :cobrado do |presupuesto|
-  		presupuesto.cobrado ? "Si" : "No"
+      presupuesto.cobrado ? "Si" : (presupuesto.adelanto_reparacion.nil? ? "No" : "Adelanto $#{presupuesto.adelanto_reparacion}")
   	end
   	column "Ingresado en", :created_at
     default_actions
   end
 
   # SHOW
-  show do |presupuesto|
-    attributes_table do
-      row :id
-      row :cliente
-      row :estado_reparacion
-      row :tipo_reparacion
-      row :marca_equipo
-      row :modelo_equipo
-      row :estado_equipo
-      row :accesorios_equipo do |presupuesto|
-        presupuesto.accesorios_equipo.collect {|accesorio| accesorio }.join(", ")
+  show do 
+    panel "Detalles de la Reparacion" do
+      attributes_table_for presupuesto do 
+        row :tipo_reparacion
+        row :marca_equipo
+        row :modelo_equipo
+        row :estado_equipo
+        row :accesorios_equipo do |presupuesto|
+          presupuesto.accesorios_equipo.collect {|accesorio| accesorio }.join(", ")
+        end
+        row :falla_equipo
       end
     end
       active_admin_comments
