@@ -17,5 +17,4 @@ $(function(){
   $("#presupuesto_cliente_id").chosen();
   $("#presupuesto_estado_reparacion").chosen();
   $("#presupuesto_tipo_reparacion").chosen();
-  $("#presupuesto_estado_equipo").chosen();
 });

@@ -17,6 +17,8 @@ form fieldset legend span {
   font-weight:100;
 }
 
+select { min-width:200px }
+
 h1, h2, h3, h4, h5, h6 {
   font-weight:100 !important;
   color:#606060; 
@@ -62,4 +64,3 @@ a.table_tools_button { color:#838A90; }
 .table_tools_segmented_control li a { color:#444; }
 
 table.index_table a { text-decoration:none; }
-

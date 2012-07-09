@@ -1,13 +1,13 @@
-ActiveAdmin.register AdminUser do
+ActiveAdmin.register AdminUser, :as => 'Empleado' do
 
   # MENU
-  menu :label => "Administradores", :parent => "Usuarios"
+  menu :label => "Empleados", :parent => "Usuarios"
 
   # FILTERS
-  filter :email, :as => :select, :collection => AdminUser.all.collect{|cliente| [cliente.email, cliente.email] }
+  filter :email, :as => :select, :collection => proc { AdminUser.all.collect{|cliente| [cliente.email, cliente.email] } }
 
   # INDEX
-  index do
+  index :title => :page_title do
     column :email
     column "Ultimo ingreso al sistema", :last_sign_in_at
     default_actions

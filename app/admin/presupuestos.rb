@@ -28,33 +28,41 @@ ActiveAdmin.register Presupuesto do
   end
 
   # FILTERS
-  filter :cliente, :as => :select, :collection => Cliente.all.collect{|cliente| [cliente.nombre, cliente.id] }, :class => "chzn-select"
-  filter :tipo_reparacion, :as => :select, :collection => ALL_TYPES.collect{|tipo| tipo.humanize }, :label => "Tipo de reparacion", :label => "Tipo de reparacion"
-  # filter :cobrado, :as => :select
-  filter :created_at, :label => "Ingresado en"
+  filter :cliente,          :as => :select, :collection => proc { Cliente.all.collect{|cliente| [cliente.nombre, cliente.id] }}, :class => "chzn-select" 
+  filter :tipo_reparacion,  :as => :select, :collection => ALL_TYPES.collect{|tipo| tipo.humanize }, :label => "Tipo de reparacion"
+  filter :created_at,       :label => "Ingresado en"
+
+  # SIDEBARS
+  # sidebar "", :only => :index do
+  # end
+
+  # BUTTONS
+  action_item :only => [:index, :new] do
+    link_to "Nuevo Cliente", new_admin_cliente_path        
+  end
 
   # FORM
   form do |f|
     f.inputs "Datos Basicos" do
-      f.input :cliente, :as => :select, :collection => Cliente.all.collect{|cliente| [cliente.nombre, cliente.id] }
+      f.input :cliente,           :include_blank => false, :as => :select, :collection => Cliente.all.collect{|cliente| [cliente.nombre, cliente.id] }, :input_html => { "data-placeholder" => "Seleccione un cliente" }
       f.input :estado_reparacion, :include_blank => false, :as => :select, :collection => ALL_STATUS.collect{|estado_reparacion| [estado_reparacion.humanize, estado_reparacion] }, :label => "Estado del presupuesto"
-      f.input :tipo_reparacion, :include_blank => false, :as => :select, :collection => ALL_TYPES.collect{|tipo| tipo.humanize }, :label => "Tipo de reparacion"
+      f.input :tipo_reparacion,   :include_blank => false, :as => :select, :collection => ALL_TYPES.collect{|tipo| tipo.humanize }, :label => "Tipo de reparacion"
     end
   	f.inputs "Datos del Equipo" do
-  		f.input :marca_equipo, :label => "Marca"
+  		f.input :marca_equipo,  :label => "Marca"
   		f.input :modelo_equipo, :label => "Modelo"
-  		f.input :estado_equipo, :include_blank => false, :as => :select, :collection => ALL_ESTADOS.collect{|estado_equipo| estado_equipo.humanize }, :label => "Estado"
-  		f.input :falla_equipo, :input_html => { :rows => 8 }, :label => "Falla"
+  		f.input :estado_equipo, :label => "Estado", :include_blank => false, :as => :radio, :collection => ALL_ESTADOS.collect{|estado_equipo| estado_equipo.humanize }
+  		f.input :falla_equipo,  :label => "Falla", :input_html => { :rows => 8 }
    	end
 
     f.inputs "Datos Opcionales" do
-      f.input :accesorios_equipo, :label => "Accesorios del equipo"
-      f.input :backup_equipo, :input_html => { :rows => 8 }, :label => "Backup", :hint => "En caso de requerir backup, especificar los directorios que deben ser resguardos."
+      f.input :accesorios_equipo, :label => "Accesorios del equipo", :as => :check_boxes, :collection => ALL_ACCESORIOS.collect{|accesorio| accesorio.humanize }
+      f.input :backup_equipo,     :label => "Backup", :input_html => { :rows => 8 }, :hint => "En caso de requerir backup, especificar los directorios que deben ser resguardos."
     end
 
     f.inputs "Datos del Pago" do
       f.input :adelanto_reparacion, :label => "Adelanto $"
-      f.input :valor_reparacion, :label => "Valor final de la reparacion $"
+      f.input :valor_reparacion,    :label => "Valor final de la reparacion $"
       f.input :cobrado
     end
    	f.buttons
@@ -75,9 +83,13 @@ ActiveAdmin.register Presupuesto do
       status_tag presupuesto.estado_reparacion           if  %w(Pausado Terminado).include? presupuesto.estado_reparacion
     end
   	column "Tipo de Equipo", :tipo_reparacion
-  	column "Falla", :falla_equipo do |presupuesto|
-      presupuesto.falla_equipo.blank? ? "N/A" : truncate(presupuesto.falla_equipo, :length => 30)
+  	column "Marca", :marca_equipo do |presupuesto|
+      presupuesto.marca_equipo.blank? ? "N/A" : presupuesto.marca_equipo
     end
+  	column "Modelo", :modelo_equipo do |presupuesto|
+      presupuesto.modelo_equipo.blank? ? "N/A" : presupuesto.modelo_equipo
+    end
+
   	column "Total", :valor_reparacion do |presupuesto|
       "$#{presupuesto.valor_reparacion}"
     end
@@ -88,14 +100,21 @@ ActiveAdmin.register Presupuesto do
     default_actions
   end
 
-  # SIDEBARS
-  # sidebar "", :only => :index do
-  # end
-
-  # BUTTONS
-  action_item :only => [:index, :new] do
-    link_to "Nuevo Cliente", new_admin_cliente_path        
+  # SHOW
+  show do |presupuesto|
+    attributes_table do
+      row :id
+      row :cliente
+      row :estado_reparacion
+      row :tipo_reparacion
+      row :marca_equipo
+      row :modelo_equipo
+      row :estado_equipo
+      row :accesorios_equipo do |presupuesto|
+        presupuesto.accesorios_equipo.collect {|accesorio| accesorio }.join(", ")
+      end
+    end
+      active_admin_comments
   end
-
 
 end
