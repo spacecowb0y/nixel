@@ -98,7 +98,9 @@ ActiveAdmin.register Presupuesto do
   	column "Modelo", :modelo_equipo do |presupuesto|
       presupuesto.modelo_equipo.blank? ? "N/A" : presupuesto.modelo_equipo
     end
-
+    column "Falla", :falla_equipo do |presupuesto|
+      truncate(presupuesto.falla_equipo, :length => 30)
+    end
   	column "Total", :valor_reparacion do |presupuesto|
       "$#{presupuesto.valor_reparacion}"
     end
