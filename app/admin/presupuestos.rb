@@ -105,7 +105,7 @@ ActiveAdmin.register Presupuesto do
       "$#{presupuesto.valor_reparacion}"
     end
   	column "Cobrado", :sortable => :cobrado do |presupuesto|
-      presupuesto.cobrado ? "Si" : (presupuesto.adelanto_reparacion <= 1 ? "No" : "Adelanto $#{presupuesto.adelanto_reparacion}")
+      presupuesto.cobrado ? "Si" : (presupuesto.adelanto_reparacion <= 1 ? "No" : "Debe $#{presupuesto.valor_reparacion-presupuesto.adelanto_reparacion}")
   	end
   	column "Ingresado en", :created_at
     default_actions
