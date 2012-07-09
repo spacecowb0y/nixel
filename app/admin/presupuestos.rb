@@ -1,7 +1,7 @@
 ActiveAdmin.register Presupuesto do
 
 	# CONFIG
-  ALL_TYPES   	 = %w(Computadora_de_escritorio Notebook Netbook Cargador Monitor Impresora Telefono Tablet Otro)
+  ALL_TYPES   	 = %w(PC_de_Escritorio All_in_One Notebook Netbook Cargador Monitor Impresora Telefono Tablet Otro)
   ALL_ESTADOS 	 = %w(Bueno Regular Malo)
   ALL_ACCESORIOS = %w(Cargador Cable_de_poder Bateria Bolso Funda)
   ALL_STATUS		 = %w(Ingresado Presupuestado En_Progreso Pausado Terminado Entregado)
@@ -91,7 +91,7 @@ ActiveAdmin.register Presupuesto do
       status_tag presupuesto.estado_reparacion, :warning if  %w(Presupuestado En_Progreso).include? presupuesto.estado_reparacion
       status_tag presupuesto.estado_reparacion           if  %w(Pausado Terminado).include? presupuesto.estado_reparacion
     end
-  	column "Tipo de Equipo", :tipo_reparacion
+  	column "Equipo", :tipo_reparacion
     # column "Marca", :marca_equipo do |presupuesto|
     #   presupuesto.marca_equipo.blank? ? "N/A" : presupuesto.marca_equipo
     # end
