@@ -36,7 +36,7 @@ ActiveAdmin.register Presupuesto do
   sidebar "Detalles del Presupuesto", :only => :show do
     attributes_table_for presupuesto do
       row :cliente do
-        presupuesto.cliente.nombre
+        presupuesto.cliente.nil? ? "N/A" : presupuesto.cliente.try(:nombre)
       end
       row :adelanto_reparacion
       row :valor_reparacion
