@@ -38,6 +38,7 @@ ActiveAdmin.register Presupuesto do
       row :cliente do
         presupuesto.cliente.nil? ? "N/A" : presupuesto.cliente.try(:nombre)
       end
+      row :adelanto_reparacion
       row :valor_reparacion
       row :cobrado do
         presupuesto.cobrado ? "Si" : (presupuesto.adelanto_reparacion <= 1 ? "No" : "Debe $#{presupuesto.valor_reparacion-presupuesto.adelanto_reparacion}")
@@ -106,7 +107,7 @@ ActiveAdmin.register Presupuesto do
       "$#{presupuesto.valor_reparacion}"
     end
   	column "Cobrado", :sortable => :cobrado do |presupuesto|
-      presupuesto.cobrado ? "Si" : (presupuesto.adelanto_reparacion <= 1 ? "No" : "Debe $#{presupuesto.valor_reparacion-presupuesto.adelanto_reparacion}")
+      presupuesto.cobrado ? "Si" : "No"
   	end
   	column "Ingresado en", :created_at
     default_actions
