@@ -38,9 +38,10 @@ ActiveAdmin.register Presupuesto do
       row :cliente do
         presupuesto.cliente.nil? ? "N/A" : presupuesto.cliente.try(:nombre)
       end
-      row :adelanto_reparacion
       row :valor_reparacion
-      row :cobrado
+      row :cobrado do
+        presupuesto.cobrado ? "Si" : (presupuesto.adelanto_reparacion <= 1 ? "No" : "Debe $#{presupuesto.valor_reparacion-presupuesto.adelanto_reparacion}")
+      end
     end
     
   end
