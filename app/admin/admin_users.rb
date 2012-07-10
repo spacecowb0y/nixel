@@ -8,6 +8,7 @@ ActiveAdmin.register AdminUser, :as => 'Empleado' do
 
   # INDEX
   index :title => :page_title do
+    column :name
     column :email
     column "Ultimo ingreso al sistema", :last_sign_in_at
     default_actions
@@ -16,6 +17,7 @@ ActiveAdmin.register AdminUser, :as => 'Empleado' do
   # FORM
   form do |f|
     f.inputs "Informacion del usuario" do
+      f.input :name
       f.input :email
     end
     f.buttons

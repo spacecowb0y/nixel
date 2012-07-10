@@ -66,3 +66,10 @@ a.table_tools_button { color:#838A90; }
 table.index_table a { text-decoration:none; }
 
 .sidebar_section .presupuesto.attributes_table th { width:130px; }
+#active_admin_content #main_content_wrapper #main_content {
+  margin-right: 390px;
+}
+#active_admin_content #sidebar {
+  width: 360px;
+  margin-left: -360px;
+}
