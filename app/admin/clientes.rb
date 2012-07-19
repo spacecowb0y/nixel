@@ -49,7 +49,8 @@ ActiveAdmin.register Cliente do
       end
     end
     
-    table_for(cliente.presupuestos, :class => "index_table") do
+    h4("Ultimos 10 presupuestos de #{cliente.try(:nombre)}")
+    table_for(cliente.presupuestos.limit(10), :class => "index_table") do
       column "ID" do |presupuesto|
         link_to presupuesto.id, admin_presupuesto_path(presupuesto)
       end
