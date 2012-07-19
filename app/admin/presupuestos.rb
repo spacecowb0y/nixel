@@ -36,7 +36,7 @@ ActiveAdmin.register Presupuesto do
   sidebar "Detalles del Presupuesto", :only => :show do
     attributes_table_for presupuesto do
       row :cliente do
-        presupuesto.cliente.nil? ? "N/A" : presupuesto.cliente.try(:nombre)
+        presupuesto.cliente.nil? ? "N/A" : link_to(presupuesto.cliente.try(:nombre), admin_cliente_path(presupuesto.cliente))
       end
       row :adelanto_reparacion
       row :valor_reparacion
@@ -44,7 +44,6 @@ ActiveAdmin.register Presupuesto do
         presupuesto.cobrado ? "Si" : (presupuesto.adelanto_reparacion <= 1 ? "No" : "Debe $#{presupuesto.valor_reparacion-presupuesto.adelanto_reparacion}")
       end
     end
-    
   end
 
   # BUTTONS
@@ -94,12 +93,6 @@ ActiveAdmin.register Presupuesto do
       status_tag presupuesto.estado_reparacion           if  %w(Pausado Terminado).include? presupuesto.estado_reparacion
     end
   	column "Equipo", :tipo_reparacion
-    # column "Marca", :marca_equipo do |presupuesto|
-    #   presupuesto.marca_equipo.blank? ? "N/A" : presupuesto.marca_equipo
-    # end
-    # column "Modelo", :modelo_equipo do |presupuesto|
-    #   presupuesto.modelo_equipo.blank? ? "N/A" : presupuesto.modelo_equipo
-    # end
     column "Falla", :falla_equipo do |presupuesto|
       truncate(presupuesto.falla_equipo, :length => 30)
     end
@@ -127,7 +120,7 @@ ActiveAdmin.register Presupuesto do
         row :falla_equipo
       end
     end
-      active_admin_comments
+    active_admin_comments
   end
 
 end

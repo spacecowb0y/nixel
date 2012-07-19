@@ -28,6 +28,7 @@ gem 'sass-rails',   '~> 3.2.3'
 
 group :development do
   gem 'heroku'
+  gem 'mysql2psql'
 end
 
 group :production do
