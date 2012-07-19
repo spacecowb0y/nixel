@@ -19,6 +19,8 @@ ActiveAdmin.register AdminUser, :as => 'Empleado' do
     f.inputs "Informacion del usuario" do
       f.input :name
       f.input :email
+      f.input :password
+      f.input :password_confirmation
     end
     f.buttons
   end

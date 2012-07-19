@@ -4,8 +4,8 @@ ActiveAdmin.register Cliente do
   menu :parent => "Usuarios"
 
   # FILTERS
-  filter :nombre, :as => :select, :collection => proc { Cliente.all.collect{|cliente| [cliente.nombre, cliente.id] } }
-  filter :email,  :as => :select, :collection => proc { Cliente.all.collect{|cliente| [cliente.email, cliente.id] } }
+  filter :nombre, :as => :select, :collection => proc { Cliente.all.collect{|cliente| [cliente.nombre, cliente.nombre] } }
+  filter :email,  :as => :select, :collection => proc { Cliente.all.collect{|cliente| [cliente.email, cliente.email] } }
 
   # BUTTONS
   action_item :only => [:index, :new] do
