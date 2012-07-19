@@ -41,7 +41,7 @@ ActiveAdmin.register Cliente do
       attributes_table_for cliente do
         row :nombre
         row :email do
-          mail_to cliente.email
+          cliente.email.blank? ? span("Informacion no especificada", :class => "empty") : mail_to(cliente.email)
         end
         row :telefono_fijo
         row :telefono_movil
@@ -49,31 +49,31 @@ ActiveAdmin.register Cliente do
       end
     end
     
-    # table_for(cliente.presupuestos) do
-    #   column "ID" do |presupuesto|
-    #     link_to presupuesto.id, admin_presupuesto_path(presupuesto)
-    #   end
-    #   column "Cliente", :cliente do |presupuesto|
-    #     presupuesto.cliente.nil? ? "N/A" : link_to(presupuesto.cliente.nombre, admin_cliente_path(presupuesto.cliente))
-    #   end
-    #   column "Estado" do |presupuesto|
-    #     status_tag presupuesto.estado_reparacion, :error   if  %w(Ingresado).include? presupuesto.estado_reparacion
-    #     status_tag presupuesto.estado_reparacion, :ok      if  %w(Entregado).include? presupuesto.estado_reparacion
-    #     status_tag presupuesto.estado_reparacion, :warning if  %w(Presupuestado En_Progreso).include? presupuesto.estado_reparacion
-    #     status_tag presupuesto.estado_reparacion           if  %w(Pausado Terminado).include? presupuesto.estado_reparacion
-    #   end
-    #   column "Equipo", :tipo_reparacion
-    #   column "Falla", :falla_equipo do |presupuesto|
-    #     presupuesto.falla_equipo.blank? ? "N/A" : truncate(presupuesto.falla_equipo, :length => 30)
-    #   end
-    #   column "Total", :valor_reparacion do |presupuesto|
-    #     "$#{presupuesto.valor_reparacion}"
-    #   end
-    #   column "Cobrado" do |presupuesto|
-    #     presupuesto.cobrado ? "Si" : "No"
-    #   end
-    #   column "Ingresado en", :created_at
-    # end
+    table_for(cliente.presupuestos, :class => "index_table") do
+      column "ID" do |presupuesto|
+        link_to presupuesto.id, admin_presupuesto_path(presupuesto)
+      end
+      column "Cliente", :cliente do |presupuesto|
+        presupuesto.cliente.nil? ? "N/A" : link_to(presupuesto.cliente.nombre, admin_cliente_path(presupuesto.cliente))
+      end
+      column "Estado" do |presupuesto|
+        status_tag presupuesto.estado_reparacion, :error   if  %w(Ingresado).include? presupuesto.estado_reparacion
+        status_tag presupuesto.estado_reparacion, :ok      if  %w(Entregado).include? presupuesto.estado_reparacion
+        status_tag presupuesto.estado_reparacion, :warning if  %w(Presupuestado En_Progreso).include? presupuesto.estado_reparacion
+        status_tag presupuesto.estado_reparacion           if  %w(Pausado Terminado).include? presupuesto.estado_reparacion
+      end
+      column "Equipo", :tipo_reparacion
+      column "Falla", :falla_equipo do |presupuesto|
+        presupuesto.falla_equipo.blank? ? "N/A" : truncate(presupuesto.falla_equipo, :length => 30)
+      end
+      column "Total", :valor_reparacion do |presupuesto|
+        "$#{presupuesto.valor_reparacion}"
+      end
+      column "Cobrado" do |presupuesto|
+        presupuesto.cobrado ? "Si" : "No"
+      end
+      column "Ingresado en", :created_at
+    end
     
   end
 
