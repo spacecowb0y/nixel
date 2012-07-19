@@ -18,7 +18,7 @@ ActiveAdmin.register Cliente do
 
   # INDEX
   index do
-    column :nombre do |cliente|
+    column :nombre, :sortable => :nombre do |cliente|
       cliente.nombre.blank? ? "N/A" : link_to(cliente.nombre, admin_cliente_path(cliente))
     end
     column :email do |cliente|

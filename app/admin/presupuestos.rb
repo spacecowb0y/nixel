@@ -41,7 +41,7 @@ ActiveAdmin.register Presupuesto do
       row :adelanto_reparacion
       row :valor_reparacion
       row :cobrado do
-        presupuesto.cobrado ? "Si" : (presupuesto.adelanto_reparacion <= 1 ? "No" : "Debe $#{presupuesto.valor_reparacion-presupuesto.adelanto_reparacion}")
+        presupuesto.cobrado ? "Si" : (presupuesto.adelanto_reparacion <= 1 ? "No" : "Debe $#{(presupuesto.valor_reparacion-presupuesto.adelanto_reparacion).abs}")
       end
     end
   end
@@ -49,6 +49,10 @@ ActiveAdmin.register Presupuesto do
   # BUTTONS
   action_item :only => [:index, :new] do
     link_to "Nuevo Cliente", new_admin_cliente_path        
+  end
+
+  action_item :only => [:show] do
+    link_to "Nuevo Presupuesto", new_admin_presupuesto_path(:presupuesto => { :cliente_id => params[:id] })
   end
 
   # FORM
@@ -87,10 +91,10 @@ ActiveAdmin.register Presupuesto do
       presupuesto.cliente.blank? ? "N/A" : link_to(presupuesto.cliente.nombre, admin_cliente_path(presupuesto.cliente))
     end
   	column "Estado", :sortable => :estado_reparacion do |presupuesto|
-      status_tag presupuesto.estado_reparacion, :error   if  %w(Ingresado).include? presupuesto.estado_reparacion
-      status_tag presupuesto.estado_reparacion, :ok      if  %w(Entregado).include? presupuesto.estado_reparacion
-      status_tag presupuesto.estado_reparacion, :warning if  %w(Presupuestado En_Progreso).include? presupuesto.estado_reparacion
-      status_tag presupuesto.estado_reparacion           if  %w(Pausado Terminado).include? presupuesto.estado_reparacion
+      status_tag presupuesto.estado_reparacion, :error   if %w(Ingresado).include? presupuesto.estado_reparacion
+      status_tag presupuesto.estado_reparacion, :ok      if %w(Entregado).include? presupuesto.estado_reparacion
+      status_tag presupuesto.estado_reparacion, :warning if %w(Presupuestado En_Progreso Tercerizado).include? presupuesto.estado_reparacion
+      status_tag presupuesto.estado_reparacion           if %w(Pausado Terminado).include? presupuesto.estado_reparacion
     end
   	column "Equipo", :tipo_reparacion
     column "Falla", :falla_equipo do |presupuesto|
@@ -115,7 +119,7 @@ ActiveAdmin.register Presupuesto do
         row :modelo_equipo
         row :estado_equipo
         row :accesorios_equipo do |presupuesto|
-          presupuesto.accesorios_equipo.collect {|accesorio| accesorio }.join(", ")
+          presupuesto.accesorios_equipo.collect { |accesorio| accesorio }.join(", ")
         end
         row :falla_equipo
       end
