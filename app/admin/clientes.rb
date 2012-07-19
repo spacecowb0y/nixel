@@ -13,7 +13,7 @@ ActiveAdmin.register Cliente do
   end
 
   action_item :only => [:show] do
-    link_to "Nuevo Presupuesto"
+    link_to "Nuevo Presupuesto", new_admin_presupuesto_path(:presupuesto => { :cliente_id => params[:id] })
   end
 
   # INDEX
