@@ -204,7 +204,7 @@ ActiveAdmin.register Presupuesto do
   member_action :imprimir do
     @presupuesto = Presupuesto.find(params[:id])
     generate_combrobante(@presupuesto)
-    send_file(@presupuesto.comprobantes_location)
+    # send_file(@presupuesto.comprobantes_location)
   end
 
 end
