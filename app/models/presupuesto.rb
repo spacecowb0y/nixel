@@ -10,4 +10,8 @@ class Presupuesto < ActiveRecord::Base
     self.accesorios_equipo.reject!(&:empty?)
   end
 
+  def comprobantes_location
+    "#{Rails.root}/pdfs/comprobante-#{self.id}.pdf"
+  end
+
 end

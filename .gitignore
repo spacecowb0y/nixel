@@ -15,4 +15,5 @@
 /tmp
 
 # Ignore assets
-public/assets/*
+/public/assets/*
+/pdfs/*
