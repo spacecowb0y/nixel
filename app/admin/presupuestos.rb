@@ -5,13 +5,13 @@ def generate_combrobante(presupuesto)
     pdf.text "Presupuesto ##{presupuesto.id}", :size => 25
 
     # Client info
-    pdf.text presupuesto.cliente.nombre
-    pdf.text presupuesto.cliente.direccion
-    pdf.text presupuesto.cliente.telefono_fijo
+    # pdf.text presupuesto.cliente.nombre
+    # pdf.text presupuesto.cliente.direccion
+    # pdf.text presupuesto.cliente.telefono_fijo
 
-    pdf.move_down 20
+    # pdf.move_down 20
 
-    pdf.text presupuesto.falla_equipo, :size => 8
+    # pdf.text presupuesto.falla_equipo, :size => 8
 
     #pdf.draw_text "#{t('.created_at')}: #{l(invoice.created_at, :format => :short)}", :at => [pdf.bounds.width / 2, pdf.bounds.height - 30]
 
@@ -64,7 +64,7 @@ def generate_combrobante(presupuesto)
     # end
 
     # Footer
-    pdf.draw_text "Generated at #{l(Time.now, :format => :long)}", :at => [0, 0]
+    # pdf.draw_text "Generated at #{l(Time.now, :format => :long)}", :at => [0, 0]
   end
 end
 ActiveAdmin.register Presupuesto do
