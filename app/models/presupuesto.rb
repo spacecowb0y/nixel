@@ -11,7 +11,7 @@ class Presupuesto < ActiveRecord::Base
   end
 
   def comprobantes_location
-    "#{Rails.root}/pdfs/comprobante-#{self.id}.pdf"
+    "#{Rails.root}/tmp/pdfs"
   end
 
 end
