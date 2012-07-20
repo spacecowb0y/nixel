@@ -17,8 +17,5 @@
 # Ignore assets
 /public/assets/*
 
-# Ignore PDFs
-/pdfs/*.pdf
-
 # Igorne .DS_Store
 .DS_Store
