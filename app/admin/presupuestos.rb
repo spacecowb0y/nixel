@@ -127,4 +127,10 @@ ActiveAdmin.register Presupuesto do
     active_admin_comments
   end
 
+  # Custom Action
+  member_action :imprimir, :method => :get do
+    @presupuesto = Presupuesto.find(params[:id])
+    render :template => 'layouts/invoice', :collection => @presupuesto, :layout => false
+  end
+
 end
